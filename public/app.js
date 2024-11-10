@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = {
             name: document.getElementById('name').value,
             role: document.getElementById('role').value,
+            github: document.getElementById('github').value,
             description: document.getElementById('description').value
         };
 
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="profile-card">
                     <h3>${escapeHtml(dev.name)}</h3>
                     <p class="role">${formatRole(dev.role)}</p>
+                    <p class="github">${escapeHtml(dev.github)}</p>
                     <p class="description">${escapeHtml(dev.description)}</p>
                     <p class="timestamp">Created: ${formatDate(dev.createdAt)}</p>
                 </div>
