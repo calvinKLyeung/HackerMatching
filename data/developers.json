@@ -1,47 +1,20 @@
 [
   {
-    "id": "1731265113279",
-    "name": "Calvin",
-    "role": "front-end",
-    "description": "asd",
-    "createdAt": "2024-11-10T18:58:33.279Z"
-  },
-  {
-    "id": "1731265189367",
-    "name": "Ben",
-    "role": "back-end",
-    "description": "HackCamp",
-    "createdAt": "2024-11-10T18:59:49.367Z"
-  },
-  {
-    "id": "1731265214874",
-    "name": "asdasd",
-    "role": "full-stack",
-    "description": "Happy",
-    "createdAt": "2024-11-10T19:00:14.874Z"
-  },
-  {
-    "id": "1731265591182",
-    "name": "ff",
-    "role": "front-end",
-    "description": "dd",
-    "createdAt": "2024-11-10T19:06:31.182Z"
-  },
-  {
-    "id": "1731265968777",
-    "name": "Joy",
-    "role": "full-stack",
-    "github": "Joy4620",
-    "description": "Yay",
-    "createdAt": "2024-11-10T19:12:48.777Z"
-  },
-  {
     "id": "1731271766401",
-    "name": "Me",
+    "name": "Joy",
     "role": "back-end",
-    "github": "hehe",
-    "linkedin": "haha",
-    "description": "yup",
+    "github": "Joy4620",
+    "linkedin": "Joy Li",
+    "description": "Amazing person",
     "createdAt": "2024-11-10T20:49:26.401Z"
+  },
+  {
+    "id": "1731277649835",
+    "name": "Bob",
+    "role": "front-end",
+    "github": "bobyang77",
+    "linkedin": "Bob Yang",
+    "description": "Cool person",
+    "createdAt": "2024-11-10T22:27:29.835Z"
   }
 ]
