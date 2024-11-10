@@ -3,60 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Match</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
-    <div class="container">
-        <section id="signup-section">
-            <h2>Create Your Profile</h2>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="role">Role:</label>
-                    <select id="role" required>
-                        <option value="">Select Your Role</option>
-                        <option value="front-end">Front-End Developer</option>
-                        <option value="back-end">Back-End Developer</option>
-                        <option value="full-stack">Full-Stack Developer</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="github">Github account:</label>
-                    <input type="text" id="github" placeholder="Enter your Github" required>
-                </div>
-                <div>
-                    <label for="linkedin">Linkedin account:</label>
-                    <input type="text" id="linkedin" placeholder="Enter your Linkedin" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" 
-                              placeholder="Describe your skills, goals, interests (max 100 words)" 
-                              maxlength="100" 
-                              required></textarea>
-                </div>
-                <button type="submit">Create Profile</button>
-            </form>
-        </section>
-
-        <section id="profiles-section">
-            <h2>Existing Profiles</h2>
-            <div class="filter-container">
-                <label for="filter-role">Filter by Role:</label>
-                <select id="filter-role">
-                    <option value="">All Roles</option>
-                    <option value="front-end">Front-End Developer</option>
-                    <option value="back-end">Back-End Developer</option>
-                    <option value="full-stack">Full-Stack Developer</option>
-                </select>
-            </div>
-            <div id="profile-container"></div>
-        </section>
+    <div class="intro-container">
+        <h1>HackMatch</h1>
+        <p>Find your match for your hacks</p>
+        <button onclick="location.href='main.html'">Sign Up</button>
     </div>
-    <script src="app.js"></script>
 </body>
 </html>
