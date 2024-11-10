@@ -6,9 +6,9 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    background-color: #f0f2f5;
+    background-color: #091b40;
     color: #333;
 }
 
@@ -32,6 +32,7 @@ h2 {
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
 }
+
 
 .form-group {
     margin-bottom: 20px;
@@ -117,6 +118,18 @@ button:hover {
     color: #3498db;
     font-weight: 500;
     margin-bottom: 10px;
+}
+
+.profile-card .github {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.profile-card .linkedin {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.5;
 }
 
 .profile-card .description {
