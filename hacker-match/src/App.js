@@ -1,32 +1,55 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProfileForm from './ProfileForm';
 import MatchList from './MatchList';
 import './App.css';
 
-const profiles = [
-  { name: 'Alice', role: 'Front-end Developer', description: 'Experienced in React and CSS' },
-  { name: 'Bob', role: 'Back-end Developer', description: 'Skilled in Node.js and Databases' },
-  { name: 'Charlie', role: 'Full-stack Developer', description: 'Proficient in JavaScript and Python' },
-  // Add more profiles
-];
-
 function App() {
+  const [users, setUsers] = useState([]);
   const [matches, setMatches] = useState([]);
 
-  const getSuggestedMatches = (selectedRole) => {
-    const roleMatches = {
-      'Front-end Developer': ['Back-end Developer', 'Full-stack Developer'],
-      'Back-end Developer': ['Front-end Developer', 'Full-stack Developer'],
-      'Full-stack Developer': ['Front-end Developer', 'Back-end Developer', 'Full-stack Developer'],
+  // Fetch profiles from the backend when the component mounts
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/users');
+        setUsers(response.data); // Store the fetched profiles in state
+      } catch (error) {
+        console.error('Error fetching profiles:', error);
+      }
     };
-    const matchedRoles = roleMatches[selectedRole] || [];
-    return profiles.filter((profile) => matchedRoles.includes(profile.role));
+    fetchProfiles();
+  }, []);
+
+  // Fetch matches from the backend based on selected role
+  const getSuggestedMatches = async (selectedRole) => {
+    try {
+      const response = await axios.get(`http://localhost:5001/match/${selectedRole}`);
+      setMatches(response.data); // Store the matches in state
+    } catch (error) {
+      console.error('Error fetching matches:', error);
+    }
   };
 
-  const handleProfileSubmit = ({ name, role, description }) => {
-    const suggestions = getSuggestedMatches(role);
-    setMatches(suggestions);
+  // Handle form submission to save profile to the backend
+  const handleProfileSubmit = async ({ name, role, description }) => {
+    try {
+      // Send a POST request to save the profile to the backend
+      const response = await axios.post('http://localhost:5001/users', {
+        name,
+        role,
+        description,
+      });
+
+      // Update the users state with the newly created user
+      setUsers([...users, response.data]);
+
+      // Fetch suggested matches based on the new user's role
+      getSuggestedMatches(role);
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
   };
 
   return (

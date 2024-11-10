@@ -28,9 +28,8 @@ function ProfileForm({ onSubmitProfile }) {
           required
         >
           <option value="">Select Your Role</option>
-          <option value="Front-end Developer">Front-End Developer</option>
-          <option value="Back-end Developer">Back-End Developer</option>
-          <option value="Full-stack Developer">Full-Stack Developer</option>
+          <option value="frontend">Front-End Developer</option>
+          <option value="backend">Back-End Developer</option>
         </select>
         <textarea
           placeholder="Describe your skills, goals, interests (max 100 words)"
