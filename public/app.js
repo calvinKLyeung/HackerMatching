@@ -74,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="role">${formatRole(dev.role)}</p>
 
                     <p class="github">
-                        <img src="./images/github-mark.png" alt="Github logo" width="30" height="30" />
+                        <img src="./images/github-mark.png" alt="Github logo" width="23" height="23" />
                         ${escapeHtml(dev.github)}
                     </p>
 
                     <p class="linkedin">
-                        <img src="./images/linkedinlogo.png" alt="Linkedin logo" width="30" height="30" />
+                        <img src="./images/linkedinlogo.png" alt="Linkedin logo" width="23" height="23"/>
                         ${escapeHtml(dev.linkedin)}
                     </p>
                     <p class="description">${escapeHtml(dev.description)}</p>
