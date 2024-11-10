@@ -8,6 +8,7 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [lastAddedUserRole, setLastAddedUserRole] = useState(null); // To track the last added user's role
 
   // Fetch profiles from the backend when the component mounts
   useEffect(() => {
@@ -22,15 +23,19 @@ function App() {
     fetchProfiles();
   }, []);
 
-  // Fetch matches from the backend based on selected role
   const getSuggestedMatches = async (selectedRole) => {
     try {
       const response = await axios.get(`http://localhost:5001/match/${selectedRole}`);
-      setMatches(response.data); // Store the matches in state
+      console.log('Fetched matches:', response.data);
+  
+      // Ensure matches is always an array, even if only one object is returned
+      const matchData = Array.isArray(response.data) ? response.data : [response.data];
+      setMatches(matchData);
     } catch (error) {
       console.error('Error fetching matches:', error);
     }
   };
+  
 
   // Handle form submission to save profile to the backend
   const handleProfileSubmit = async ({ name, role, description }) => {
@@ -45,16 +50,28 @@ function App() {
       // Update the users state with the newly created user
       setUsers([...users, response.data]);
 
-      // Fetch suggested matches based on the new user's role
-      getSuggestedMatches(role);
+      // Update the last added user's role
+      setLastAddedUserRole(role);
     } catch (error) {
       console.error('Error saving profile:', error);
+    }
+  };
+
+  // Handle the "Start Matching" button click
+  const handleStartMatching = () => {
+    if (lastAddedUserRole) {
+      getSuggestedMatches(lastAddedUserRole);
+    } else {
+      console.error('No role specified for matching.');
     }
   };
 
   return (
     <div className="App">
       <ProfileForm onSubmitProfile={handleProfileSubmit} />
+      <button onClick={handleStartMatching} disabled={!lastAddedUserRole}>
+        Start Matching
+      </button>
       <MatchList matches={matches} />
     </div>
   );
