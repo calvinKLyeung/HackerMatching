@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="profile-card">
                     <h3>${escapeHtml(dev.name)}</h3>
                     <p class="role">${formatRole(dev.role)}</p>
-                    <p class="github">${escapeHtml(dev.github)}</p>
+                    <div>
+                        <img src="./images/github-mark.png" alt="Github logo" width="30" height="30" />
+                        <p class="github">${escapeHtml(dev.github)}</p>
+                    </div>
                     <p class="description">${escapeHtml(dev.description)}</p>
                     <p class="timestamp">Created: ${formatDate(dev.createdAt)}</p>
                 </div>
