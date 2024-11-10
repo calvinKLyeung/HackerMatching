@@ -27,7 +27,23 @@ class DeveloperCardSwipe {
         }
     }
 
-    showNextProfile() {
+    // showNextProfile() {
+    //     if (this.currentIndex >= this.profiles.length) {
+    //         this.cardContainer.style.display = 'none';
+    //         this.noMoreProfiles.style.display = 'block';
+    //         return;
+    //     }
+
+    //     const profile = this.profiles[this.currentIndex];
+    //     const card = this.createProfileCard(profile);
+        
+    //     this.cardContainer.innerHTML = '';
+    //     this.cardContainer.appendChild(card);
+        
+    //     // Add touch handlers
+    //     this.addTouchHandlers(card);
+    // }
+    async showNextProfile() {
         if (this.currentIndex >= this.profiles.length) {
             this.cardContainer.style.display = 'none';
             this.noMoreProfiles.style.display = 'block';
@@ -35,7 +51,7 @@ class DeveloperCardSwipe {
         }
 
         const profile = this.profiles[this.currentIndex];
-        const card = this.createProfileCard(profile);
+        const card = await this.createProfileCard(profile);
         
         this.cardContainer.innerHTML = '';
         this.cardContainer.appendChild(card);
@@ -43,18 +59,73 @@ class DeveloperCardSwipe {
         // Add touch handlers
         this.addTouchHandlers(card);
     }
+    
 
-    createProfileCard(profile) {
+
+    // Fetch the person's github Profile Pic 
+    async fetchGitHubProfile(username) {
+        try {
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            if (!response.ok) throw new Error('Failed to fetch GitHub profile');
+            const data = await response.json();
+            return data.avatar_url;
+        } catch (error) {
+            console.error('Error fetching GitHub profile:', error);
+            return 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'; // Default GitHub logo
+        }
+    }
+
+    // createProfileCard(profile) {
+    //     const card = document.createElement('div');
+    //     card.className = 'profile-card';
+        
+    //     const contributionData = this.generateContributionVisualization();
+        
+    //     card.innerHTML = `
+    //         <div class="profile-image">
+    //             <img src="${profile.imageUrl || '/images/placeholder.png'}" 
+    //                  alt="${profile.name}" 
+    //                  onerror="this.src='/images/placeholder.png'">
+    //         </div>
+    //         <div class="profile-info">
+    //             <h2 class="profile-name">${profile.name}</h2>
+    //             <p class="profile-role">${this.formatRole(profile.role)}</p>
+                
+    //             <div class="profile-links">
+    //                 <a href="https://github.com/${profile.github}" target="_blank">
+    //                     <img src="./images/github-mark.png" alt="Github" width="20" height="20">
+    //                     ${profile.github}
+    //                 </a>
+    //                 <a href="${profile.linkedin}" target="_blank">
+    //                     <img src="./images/linkedinlogo.png" alt="LinkedIn" width="20" height="20">
+    //                     LinkedIn
+    //                 </a>
+    //             </div>
+
+    //             <div class="github-chart">
+    //                 <small>GitHub Activity</small>
+    //                 <div class="contribution-grid">
+    //                     ${contributionData}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `;
+    //     return card;
+    // }
+
+    async createProfileCard(profile) {
         const card = document.createElement('div');
         card.className = 'profile-card';
         
+        // Fetch GitHub avatar URL
+        const avatarUrl = await this.fetchGitHubProfile(profile.github);
         const contributionData = this.generateContributionVisualization();
         
         card.innerHTML = `
             <div class="profile-image">
-                <img src="${profile.imageUrl || '/images/placeholder.png'}" 
+                <img src="${avatarUrl}" 
                      alt="${profile.name}" 
-                     onerror="this.src='/images/placeholder.png'">
+                     onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
             </div>
             <div class="profile-info">
                 <h2 class="profile-name">${profile.name}</h2>
@@ -82,6 +153,10 @@ class DeveloperCardSwipe {
 
         return card;
     }
+
+
+
+
 
     generateContributionVisualization() {
         // Generate a simple visualization of contribution activity
