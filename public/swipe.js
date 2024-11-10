@@ -225,6 +225,7 @@ class DeveloperCardSwipe {
         const card = document.querySelector('.profile-card');
         card.classList.add('swipe-right');
         this.handleSwipe('accept');
+        window.location.href = 'match.html';
     }
 
     handleSwipe(direction) {
