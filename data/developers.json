@@ -25,5 +25,14 @@
     "linkedin": "https://www.linkedin.com/in/preethi-chidambaram-34b382215",
     "description": "I am fluent in HTML, CSS and JavaScript. Would love to work on new and innovative projects!",
     "createdAt": "2024-11-10T23:50:27.562Z"
+  },
+  {
+    "id": "1731282909125",
+    "name": "Alice",
+    "role": "full-stack",
+    "github": "alice-w",
+    "linkedin": "alice-w",
+    "description": "Looking forward to collaborating with people who have experience using AWS cloud!",
+    "createdAt": "2024-11-10T23:55:09.125Z"
   }
 ]
