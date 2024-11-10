@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Match - Swipe</title>
+    <link rel="stylesheet" href="swipe-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="back-button">
+                    ← Back to Profiles
+                </a>
+            </nav>
+        </header>
+
+        <div class="swipe-container">
+            <div class="card-container">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="actions">
+                <button class="action-button reject">✕</button>
+                <button class="action-button accept">♥</button>
+            </div>
+        </div>
+
+        <div class="no-more-profiles" style="display: none;">
+            <h2>No more profiles to show!</h2>
+            <p>Check back later for new developers.</p>
+        </div>
+    </div>
+    <script src="swipe.js"></script>
+</body>
+</html>
