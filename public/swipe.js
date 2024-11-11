@@ -113,13 +113,116 @@ class DeveloperCardSwipe {
     //     return card;
     // }
 
+    // async createProfileCard(profile) {
+    //     const card = document.createElement('div');
+    //     card.className = 'profile-card';
+        
+    //     // Fetch GitHub avatar URL
+    //     const avatarUrl = await this.fetchGitHubProfile(profile.github);
+    //     const contributionData = this.generateContributionVisualization();
+        
+    //     card.innerHTML = `
+    //         <div class="profile-image">
+    //             <img src="${avatarUrl}" 
+    //                  alt="${profile.name}" 
+    //                  onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
+    //         </div>
+    //         <div class="profile-info">
+    //             <h2 class="profile-name">${profile.name}</h2>
+    //             <p class="profile-role">${this.formatRole(profile.role)}</p>
+                
+    //             <div class="profile-links">
+    //                 <a href="https://github.com/${profile.github}" target="_blank">
+    //                     <img src="./images/github-mark.png" alt="Github" width="20" height="20">
+    //                     ${profile.github}
+    //                 </a>
+    //                 <a href="${profile.linkedin}" target="_blank">
+    //                     <img src="./images/linkedinlogo.png" alt="LinkedIn" width="20" height="20">
+    //                     LinkedIn
+    //                 </a>
+    //             </div>
+    
+    //             <div class="profile-description">
+    //                 <p>${profile.description}</p>
+    //             </div>
+    
+    //             <div class="github-chart">
+    //                 <small>GitHub Activity</small>
+    //                 <div class="contribution-grid">
+    //                     ${contributionData}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `;
+    
+    //     return card;
+    // }
+
+
+    // async createProfileCard(profile) {
+    //     const card = document.createElement('div');
+    //     card.className = 'profile-card';
+        
+    //     // Fetch both GitHub avatar and contributions
+    //     const [avatarUrl, contributions] = await Promise.all([
+    //         this.fetchGitHubProfile(profile.github),
+    //         this.fetchGitHubContributions(profile.github)
+    //     ]);
+        
+    //     card.innerHTML = `
+    //         <div class="profile-image">
+    //             <img src="${avatarUrl}" 
+    //                  alt="${profile.name}" 
+    //                  onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
+    //         </div>
+    //         <div class="profile-info">
+    //             <h2 class="profile-name">${profile.name}</h2>
+    //             <p class="profile-role">${this.formatRole(profile.role)}</p>
+                
+    //             <div class="profile-links">
+    //                 <a href="https://github.com/${profile.github}" target="_blank">
+    //                     <img src="./images/github-mark.png" alt="Github" width="20" height="20">
+    //                     ${profile.github}
+    //                 </a>
+    //                 <a href="${profile.linkedin}" target="_blank">
+    //                     <img src="./images/linkedinlogo.png" alt="LinkedIn" width="20" height="20">
+    //                     LinkedIn
+    //                 </a>
+    //             </div>
+    
+    //             <div class="profile-description">
+    //                 <p>${profile.description}</p>
+    //             </div>
+    
+    //             <div class="github-chart">
+    //                 <small>GitHub Activity (Last 12 Weeks)</small>
+    //                 <div class="contribution-grid">
+    //                     ${this.generateContributionVisualization(contributions)}
+    //                 </div>
+    //                 <div class="contribution-legend">
+    //                     <span class="legend-label">Less</span>
+    //                     <div class="legend-cells">
+    //                         ${this.generateLegend()}
+    //                     </div>
+    //                     <span class="legend-label">More</span>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `;
+    //     return card;
+    // }
+
+
+
     async createProfileCard(profile) {
         const card = document.createElement('div');
         card.className = 'profile-card';
         
-        // Fetch GitHub avatar URL
-        const avatarUrl = await this.fetchGitHubProfile(profile.github);
-        const contributionData = this.generateContributionVisualization();
+        // Fetch both GitHub avatar and contributions
+        const [avatarUrl, contributions] = await Promise.all([
+            this.fetchGitHubProfile(profile.github),
+            this.fetchGitHubContributions(profile.github)
+        ]);
         
         card.innerHTML = `
             <div class="profile-image">
@@ -147,14 +250,13 @@ class DeveloperCardSwipe {
                 </div>
     
                 <div class="github-chart">
-                    <small>GitHub Activity</small>
+                    <small>GitHub Activity (Last 12 Months)</small>
                     <div class="contribution-grid">
-                        ${contributionData}
+                        ${this.generateContributionVisualization(contributions)}
                     </div>
                 </div>
             </div>
         `;
-    
         return card;
     }
 
@@ -162,21 +264,122 @@ class DeveloperCardSwipe {
 
 
 
-    generateContributionVisualization() {
-        // Generate a simple visualization of contribution activity
-        return Array(12).fill(0).map(() => {
-            const intensity = Math.random();
+
+
+
+
+
+
+    async fetchGitHubContributions(username) {
+        try {
+            const response = await fetch(`/api/github/${username}/contributions`);
+            if (!response.ok) throw new Error('Failed to fetch GitHub contributions');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching GitHub contributions:', error);
+            return Array(12).fill(0);
+        }
+    }
+
+
+
+
+
+    // generateContributionVisualization() {
+    //     // Generate a simple visualization of contribution activity
+    //     return Array(12).fill(0).map(() => {
+    //         const intensity = Math.random();
+    //         const color = this.getActivityColor(intensity);
+    //         return `<div class="contribution-cell" style="background-color: ${color}"></div>`;
+    //     }).join('');
+    // }
+
+    // generateContributionVisualization(contributions) {
+    //     const maxContributions = Math.max(...contributions, 1); // Avoid division by zero
+        
+    //     return contributions.map((count, index) => {
+    //         const intensity = count / maxContributions;
+    //         const color = this.getActivityColor(intensity);
+    //         const weeksAgo = 11 - index;
+    //         const tooltip = `${count} contributions ${weeksAgo} week${weeksAgo === 1 ? '' : 's'} ago`;
+            
+    //         return `<div class="contribution-cell" 
+    //                      style="background-color: ${color}" 
+    //                      title="${tooltip}"></div>`;
+    //     }).join('');
+    // }
+
+    generateContributionVisualization(contributions) {
+        const maxContributions = Math.max(...contributions, 1); // Avoid division by zero
+        const months = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        
+        // Get current month index
+        const currentMonthIndex = new Date().getMonth();
+        
+        return contributions.map((count, index) => {
+            const intensity = count / maxContributions;
             const color = this.getActivityColor(intensity);
-            return `<div class="contribution-cell" style="background-color: ${color}"></div>`;
+            
+            // Calculate the month for this cell
+            const monthIndex = (currentMonthIndex - (11 - index) + 12) % 12;
+            const monthName = months[monthIndex];
+            
+            const tooltip = `${count} contributions in ${monthName}`;
+            
+            return `<div class="contribution-cell" 
+                         style="background-color: ${color}" 
+                         title="${tooltip}"></div>`;
         }).join('');
     }
 
+    
+
+
+
+
+
+
+
+    // getActivityColor(intensity) {
+    //     const hue = 200; // Blue hue
+    //     const saturation = 80;
+    //     const lightness = 95 - (intensity * 40);
+    //     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    // }
+
+    // getActivityColor(intensity) {
+    //     if (intensity === 0) return '#ebedf0';
+    //     if (intensity <= 0.25) return '#9be9a8';
+    //     if (intensity <= 0.5) return '#40c463';
+    //     if (intensity <= 0.75) return '#30a14e';
+    //     return '#216e39';
+    // }
+
+
     getActivityColor(intensity) {
-        const hue = 200; // Blue hue
-        const saturation = 80;
-        const lightness = 95 - (intensity * 40);
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        if (intensity === 0) return '#ebedf0';
+        if (intensity <= 0.25) return '#9be9a8';
+        if (intensity <= 0.5) return '#40c463';
+        if (intensity <= 0.75) return '#30a14e';
+        return '#216e39';
     }
+
+
+    generateLegend() {
+        const intensities = [0, 0.25, 0.5, 0.75, 1];
+        return intensities
+            .map(intensity => {
+                const color = this.getActivityColor(intensity);
+                return `<div class="legend-cell" style="background-color: ${color}"></div>`;
+            })
+            .join('');
+    }
+
+
+
 
     formatRole(role) {
         return role

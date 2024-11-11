@@ -187,3 +187,51 @@ button:hover {
 .nav-button:hover {
     background-color: #2980b9;
 }
+
+
+/*
+    Section for Github contribution on the profile of the swipe page 
+*/
+
+.contribution-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.legend-cells {
+    display: flex;
+    gap: 2px;
+}
+
+.legend-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-label {
+    color: #666;
+}
+
+.contribution-cell {
+    position: relative;
+}
+
+.contribution-cell:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1;
+}
