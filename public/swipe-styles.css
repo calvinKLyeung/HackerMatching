@@ -26,16 +26,31 @@ header {
     font-weight: 500;
 }
 
-.swipe-container {
+/* .swipe-container {
     position: relative;
     height: 600px;
+} */
+
+/* .card-container {
+    position: relative;
+    height: 500px;
+    width: 100%;
+} */
+
+
+.swipe-container {
+    position: relative;
+    height: 800px;  /* Increased from 600px */
 }
 
 .card-container {
     position: relative;
-    height: 500px;
+    height: 600px;  /* Increased from 500px */
     width: 100%;
 }
+
+
+
 
 .profile-card {
     position: absolute;
@@ -90,11 +105,6 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-
-.profile-info {
-    padding: 20px;
-}
 
 .profile-name {
     font-size: 24px;
@@ -181,4 +191,37 @@ header {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/*
+    For Description Section on Profile on the swipe page 
+*/
+
+
+.profile-description {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.profile-description p {
+    color: #2c3e50;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Adjust existing styles to accommodate the new description */
+.profile-info {
+    padding: 20px;
+    overflow-y: auto; /* Allows scrolling if content is too long */
+}
+
+/* Optional: Add some spacing between sections */
+.github-chart {
+    margin-top: 15px;
 }

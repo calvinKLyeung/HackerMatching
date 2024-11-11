@@ -34,5 +34,23 @@
     "linkedin": "alice-w",
     "description": "Looking forward to collaborating with people who have experience using AWS cloud!",
     "createdAt": "2024-11-10T23:55:09.125Z"
+  },
+  {
+    "id": "1731284311616",
+    "name": "John Doe",
+    "role": "back-end",
+    "github": "john-doe",
+    "linkedin": "john-doe",
+    "description": "I am proficient in C, C++, and Python. Would love to learn more about React and Figma!",
+    "createdAt": "2024-11-11T00:18:31.616Z"
+  },
+  {
+    "id": "1731284464119",
+    "name": "Ella Smith",
+    "role": "full-stack",
+    "github": "ella-s",
+    "linkedin": "ella-s",
+    "description": "Interested in learning more about ML and OpenAI! Feel free to msg me on LinkedIn :)",
+    "createdAt": "2024-11-11T00:21:04.120Z"
   }
 ]
