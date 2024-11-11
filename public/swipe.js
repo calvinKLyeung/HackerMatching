@@ -436,21 +436,53 @@ class DeveloperCardSwipe {
         this.handleSwipe('reject');
     }
 
+    // swipeRight() {
+    //     const card = document.querySelector('.profile-card');
+    //     card.classList.add('swipe-right');
+    
+    //     const profile = this.profiles[this.currentIndex];
+        
+    //     // Fetch the avatar URL if it's not already available in the profile
+    //     if (profile && profile.github) {
+    //         this.fetchGitHubProfile(profile.github).then(avatarUrl => {
+    //             localStorage.setItem("matchedAvatarUrl", avatarUrl);
+    //             console.log("Saved avatar URL to localStorage:", avatarUrl); // Debug log
+    //             window.location.href = 'match.html';
+    //         });
+    //     } else {
+    //         console.warn("No GitHub username available for this profile:", profile);
+    //         window.location.href = 'match.html';
+    //     }
+    // }
+
     swipeRight() {
         const card = document.querySelector('.profile-card');
         card.classList.add('swipe-right');
     
         const profile = this.profiles[this.currentIndex];
         
-        // Fetch the avatar URL if it's not already available in the profile
+        // Store all profile data when there's a match
         if (profile && profile.github) {
             this.fetchGitHubProfile(profile.github).then(avatarUrl => {
+                // Store the avatar URL
                 localStorage.setItem("matchedAvatarUrl", avatarUrl);
-                console.log("Saved avatar URL to localStorage:", avatarUrl); // Debug log
+                
+                // Store the complete profile data
+                localStorage.setItem("matchedProfile", JSON.stringify({
+                    name: profile.name,
+                    role: profile.role,
+                    github: profile.github,
+                    linkedin: profile.linkedin,
+                    description: profile.description
+                }));
+    
+                console.log("Saved profile data to localStorage:", profile); // Debug log
+                this.handleSwipe('accept');
                 window.location.href = 'match.html';
             });
         } else {
             console.warn("No GitHub username available for this profile:", profile);
+            this.handleSwipe('accept');
             window.location.href = 'match.html';
         }
     }

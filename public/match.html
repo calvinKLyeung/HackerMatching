@@ -24,20 +24,53 @@
             <div class="avatar-container">
                 <img id="avatar" src="" alt="Matched Person's Avatar">
             </div>
+            <div class="profile-info">
+                <h3 id="profile-name"></h3>
+                <p id="profile-role"></p>
+                
+                <div class="profile-links">
+                    <a id="github-link" href="#" target="_blank">
+                        <img src="./images/github-mark.png" alt="Github" width="20" height="20">
+                        <span id="github-username"></span>
+                    </a>
+                    <a id="linkedin-link" href="#" target="_blank">
+                        <img src="./images/linkedinlogo.png" alt="LinkedIn" width="20" height="20">
+                        LinkedIn
+                    </a>
+                </div>
+
+                <div class="profile-description">
+                    <p id="profile-description"></p>
+                </div>
+            </div>
             <a href="#" class="chat-button">Chat Now</a>
         </section>
     </div>
 
     <script>
-        // Retrieve the matched GitHub avatar URL from localStorage
+        // Retrieve the matched profile data from localStorage
         const matchedAvatarUrl = localStorage.getItem("matchedAvatarUrl");
-        console.log("Retrieved avatar URL from localStorage:", matchedAvatarUrl);
+        const matchedProfile = JSON.parse(localStorage.getItem("matchedProfile"));
 
-        // Display the avatar if it exists
-        if (matchedAvatarUrl) {
-            document.getElementById("avatar").src = matchedAvatarUrl;
+        if (matchedProfile) {
+            // Set avatar
+            document.getElementById("avatar").src = matchedAvatarUrl || '';
+            
+            // Set profile details
+            document.getElementById("profile-name").textContent = matchedProfile.name;
+            document.getElementById("profile-role").textContent = matchedProfile.role;
+            document.getElementById("profile-description").textContent = matchedProfile.description;
+            
+            // Set GitHub link
+            const githubLink = document.getElementById("github-link");
+            githubLink.href = `https://github.com/${matchedProfile.github}`;
+            document.getElementById("github-username").textContent = matchedProfile.github;
+            
+            // Set LinkedIn link
+            const linkedinLink = document.getElementById("linkedin-link");
+            linkedinLink.href = matchedProfile.linkedin;
         } else {
-            document.getElementById("avatar").alt = "No avatar available";
+            document.getElementById("avatar").alt = "No profile available";
         }
     </script>
 </body>
