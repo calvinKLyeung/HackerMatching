@@ -52,5 +52,14 @@
     "linkedin": "ella-s",
     "description": "Interested in learning more about ML and OpenAI! Feel free to msg me on LinkedIn :)",
     "createdAt": "2024-11-11T00:21:04.120Z"
+  },
+  {
+    "id": "1731287179543",
+    "name": "Andrej",
+    "role": "full-stack",
+    "github": "karpathy",
+    "linkedin": "none",
+    "description": "God ",
+    "createdAt": "2024-11-11T01:06:19.543Z"
   }
 ]
