@@ -39,7 +39,13 @@ h2 {
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
 }
+h3 {
+    color: white;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-size: 5em;
 
+}
 
 .form-group {
     margin-bottom: 20px;
