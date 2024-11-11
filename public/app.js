@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
     const profileContainer = document.getElementById('profile-container');
     const filterRole = document.getElementById('filter-role');
+    const ourRole = document.getElementById('user-role');
     
     let developers = [];
 
@@ -11,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     signupForm.addEventListener('submit', handleSubmit);
-    filterRole.addEventListener('change', handleFilter);
+    // filterRole.addEventListener('change', handleFilter);
+    ourRole.addEventListener('change', handleFilter);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -59,10 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleFilter() {
-        const selectedRole = filterRole.value;
+        console.log(ourRole)
+        const selectedRole = ourRole.value;
         const filteredDevelopers = selectedRole
             ? developers.filter(dev => dev.role === selectedRole)
             : developers;
+
+        console.log(filteredDevelopers, selectedRole)
+        const swipeButton = document.getElementById('swipe-button')
+        console.log(swipeButton, swipeButton.getAttribute("href"))
+        console.log(selectedRole)
+        swipeButton.setAttribute("href", swipeButton.getAttribute("href") + "?role=" + selectedRole)
         displayProfiles(filteredDevelopers);
     }
 

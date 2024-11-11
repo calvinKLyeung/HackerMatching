@@ -20,7 +20,15 @@ class DeveloperCardSwipe {
     async loadProfiles() {
         try {
             const response = await fetch('/api/developers');
-            this.profiles = await response.json();
+            const devs = await response.json();
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            console.log(role)
+            console.log(devs)
+            this.profiles = role
+            ? devs.filter(dev => dev.role !== role)
+            : devs;
+            console.log(this.profiles)
             this.showNextProfile();
         } catch (error) {
             console.error('Error loading profiles:', error);
