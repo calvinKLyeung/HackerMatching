@@ -15,13 +15,28 @@
                 </a>
             </nav>
         </header>
-
     </div>
 
     <div class="container">
         <section id="Matched">
             <h2>You found your match!</h2>
+            <div class="avatar-container">
+                <img id="avatar" src="" alt="Matched Person's Avatar">
+            </div>
         </section>
     </div>
+
+    <script>
+        // Retrieve the matched GitHub avatar URL from localStorage
+        const matchedAvatarUrl = localStorage.getItem("matchedAvatarUrl");
+        console.log("Retrieved avatar URL from localStorage:", matchedAvatarUrl);
+
+        // Display the avatar if it exists
+        if (matchedAvatarUrl) {
+            document.getElementById("avatar").src = matchedAvatarUrl;
+        } else {
+            document.getElementById("avatar").alt = "No avatar available";
+        }
+    </script>
 </body>
 </html>

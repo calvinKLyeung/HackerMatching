@@ -439,9 +439,22 @@ class DeveloperCardSwipe {
     swipeRight() {
         const card = document.querySelector('.profile-card');
         card.classList.add('swipe-right');
-        this.handleSwipe('accept');
-        window.location.href = 'match.html';
+    
+        const profile = this.profiles[this.currentIndex];
+        
+        // Fetch the avatar URL if it's not already available in the profile
+        if (profile && profile.github) {
+            this.fetchGitHubProfile(profile.github).then(avatarUrl => {
+                localStorage.setItem("matchedAvatarUrl", avatarUrl);
+                console.log("Saved avatar URL to localStorage:", avatarUrl); // Debug log
+                window.location.href = 'match.html';
+            });
+        } else {
+            console.warn("No GitHub username available for this profile:", profile);
+            window.location.href = 'match.html';
+        }
     }
+    
 
     handleSwipe(direction) {
         setTimeout(() => {
