@@ -54,4 +54,5 @@ button:hover {
     position: absolute;
     top: 200px;
     right: 400px;
+    z-index: -1;
 }
