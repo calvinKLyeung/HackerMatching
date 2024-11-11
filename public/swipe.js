@@ -141,7 +141,11 @@ class DeveloperCardSwipe {
                         LinkedIn
                     </a>
                 </div>
-
+    
+                <div class="profile-description">
+                    <p>${profile.description}</p>
+                </div>
+    
                 <div class="github-chart">
                     <small>GitHub Activity</small>
                     <div class="contribution-grid">
@@ -150,7 +154,7 @@ class DeveloperCardSwipe {
                 </div>
             </div>
         `;
-
+    
         return card;
     }
 
